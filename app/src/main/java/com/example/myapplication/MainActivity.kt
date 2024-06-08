@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,4 +19,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
+
+    fun myClickhandler(view: View) {
+        Log.i("MainActivity", "button clicked")
+    }
+
 }
