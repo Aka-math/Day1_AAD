@@ -63,9 +63,30 @@ class MainActivity : AppCompatActivity() {
 
         //createAlarm("its time",19,30)
 
+        add(10,20)
+
         var hIntent = Intent(this,HomeActivity::class.java)
         hIntent.putExtra("nkey","abdul-android")
         startActivity(hIntent)
+    }
+
+    private fun add(i: Int, i1: Int): Int {
+        var c = 5 *20;
+        var d = c+i;
+        mul(5,4)
+        return i + i1
+    }
+
+    private fun mul(i: Int, i1: Int) {
+        div(9,3)
+    }
+
+    private fun div(i: Int, i1: Int) {
+        subtract(10,5)
+    }
+
+    private fun subtract(i: Int, i1: Int) {
+        i1-i
     }
 
     fun createAlarm(message: String, hour: Int, minutes: Int) {
