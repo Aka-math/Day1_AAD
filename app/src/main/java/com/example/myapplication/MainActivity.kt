@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         //createAlarm("its time",19,30)
 
         var hIntent = Intent(this,HomeActivity::class.java)
+        hIntent.putExtra("nkey","abdul-android")
         startActivity(hIntent)
     }
 
