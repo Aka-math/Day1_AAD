@@ -25,4 +25,8 @@ class HomeActivity : AppCompatActivity() {
         val homeTextView:TextView = findViewById(itshome)
         homeTextView.setText(data)
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
 }

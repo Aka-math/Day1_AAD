@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        Log.i(TAG,"activity created")
+        Log.i(TAG,"activity created -- memory allocations")
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -30,25 +30,23 @@ class MainActivity : AppCompatActivity() {
     //chick has hatched  --- activity is visible for clicks
     override fun onStart() {
         super.onStart()
-        Log.i(TAG,"activity started")
-    }
+        Log.e(TAG,"activity started -- initialize  data")    }
 
     //chick has woken up -- come back to the foreground
     override fun onResume() {
         super.onResume()
-        Log.i(TAG,"activity resumed")
-    }
+        Log.w(TAG,"activity resumed --restore state of the app")    }
 
     //chick has slept  --is partially visible -- background
     override fun onPause() {
         super.onPause()
-        Log.i(TAG,"activity paused")
+        Log.d(TAG,"activity paused --store the app state")
     }
 
     //activity hibernated
     override fun onStop() {
         super.onStop()
-        Log.i(TAG,"activity stopped")
+        Log.v(TAG,"activity stopped")
     }
 
     //all the resources are purged
