@@ -1,4 +1,4 @@
-package com.example.vitbatch2.javaexs;
+package com.example.myapplication.javaexs;
 
 public class OnClickImpl implements OnClickListener{
     @Override

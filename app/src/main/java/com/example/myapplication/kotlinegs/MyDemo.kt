@@ -1,7 +1,7 @@
-package com.example.vitbatch2.kotlinegs
+package com.example.myapplication.kotlinegs
 
-import com.example.vitbatch2.Employee
-import com.example.vitbatch2.Student
+import com.example.myapplication.Employee
+import com.example.myapplication.Student
 
 fun main() {
    var someLamda : (Int,Int) -> Int = {a:Int,b:Int -> a+b}
