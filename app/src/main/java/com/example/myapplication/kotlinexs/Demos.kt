@@ -1,6 +1,11 @@
-package com.example.vitbatch2.kotlinexs
+package com.example.myapplication.kotlinexs
 
 fun main() {
+
+    val s = Square(10)
+
+    println("".printVitNames("students of vvit"))
+
    println( double(20))
     tempToday("mon",32)
     drive(mph=10, speed = "slow")
@@ -17,8 +22,9 @@ fun printHello(name: String?) {
     println("Hi there!")
 }
 
-fun drive(speed: String = "fast",mph:Int) {
+fun drive(speed: String = "fast",mph:Int): String {
     println("driving $speed")
+    return ""
 }
 
 fun tempToday(day: String, temp: Int) {
@@ -28,5 +34,12 @@ fun tempToday(day: String, temp: Int) {
 
 fun double(x: Int) = x * 2
 
+fun String.printVitNames( names:String){
+    println(names)
+}
 
-
+class Square(val side: Int) {
+    init {
+        println(side * 2)
+    }
+}

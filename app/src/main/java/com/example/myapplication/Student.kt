@@ -1,4 +1,4 @@
-package com.example.vitbatch2
+package com.example.myapplication
 
 /**
  * POJO = plain old java object, VO = value object
