@@ -41,4 +41,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/etUi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="enter test string"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    <Button
+        android:id="@+id/btnUi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="11dp"
+        android:text="get text"
+        android:onClick="getShowText"
+        app:layout_constraintStart_toStartOf="@+id/etUi"
+        app:layout_constraintTop_toBottomOf="@+id/etUi" />
+
+    <TextView
+        android:id="@+id/tvUi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="21dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUi" />
 </androidx.constraintlayout.widget.ConstraintLayout>
