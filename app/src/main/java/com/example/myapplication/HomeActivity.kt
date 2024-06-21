@@ -2,12 +2,16 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.R.id.itshome
+import com.example.myapplication.network.MarsApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,5 +30,14 @@ class HomeActivity : AppCompatActivity() {
         homeTextView.setText(data)  */
     }
 
+    fun getJson(view: View) {
+        getMarsPhotos()
+    }
 
+    private fun getMarsPhotos() {
+        GlobalScope.launch {
+            val listResult = MarsApi.retrofitService.getPhotos()
+            Log.i("HomeActivity",listResult)
+        }
+    }
 }
