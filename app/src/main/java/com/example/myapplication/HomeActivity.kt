@@ -8,17 +8,33 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.id.itshome
+import com.example.myapplication.network.MarsAdapter
 import com.example.myapplication.network.MarsApi
+import com.example.myapplication.network.MarsPhoto
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
+    lateinit var recyclerview: RecyclerView
+    lateinit var listMarsPhotos:List<MarsPhoto>
+    lateinit var marsAdapter: MarsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
-        /*  ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        recyclerview = findViewById(R.id.recyclerView)
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        listMarsPhotos = ArrayList<MarsPhoto>()
+        marsAdapter = MarsAdapter(listMarsPhotos)
+        recyclerview.adapter = marsAdapter
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -27,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
         var data = intent.extras?.getString("nkey")
         Log.i("HomeActivity","data is = "+data)
         val homeTextView:TextView = findViewById(itshome)
-        homeTextView.setText(data)  */
+        homeTextView.setText(data)
     }
 
     fun getJson(view: View) {
@@ -35,8 +51,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getMarsPhotos() {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
+            //doing time taking tasks on the main thread is not advisable
+
             val listMarsPhoto = MarsApi.retrofitService.getPhotos()
+            //listMarsPhotos = listMarsPhoto
+            marsAdapter.listMarsPhotos = listMarsPhoto
+            marsAdapter.notifyItemRangeChanged(0,listMarsPhoto.size)
             Log.i("HomeActivity-1st imgsrc",listMarsPhoto.get(0).imgSrc)
         }
     }
