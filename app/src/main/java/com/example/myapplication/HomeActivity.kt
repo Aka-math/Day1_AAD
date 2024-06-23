@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.myapplication.R.id.itshome
+import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.network.MarsAdapter
 import com.example.myapplication.network.MarsApi
 import com.example.myapplication.network.MarsPhoto
@@ -21,7 +22,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var recyclerview: RecyclerView
+
+    private lateinit var binding: ActivityHomeBinding
+
+    //lateinit var recyclerview: RecyclerView
     lateinit var listMarsPhotos:List<MarsPhoto>
     lateinit var marsAdapter: MarsAdapter
     //lateinit var imageView: ImageView
@@ -29,30 +33,44 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home)
+        //setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         //imageView = findViewById(R.id.imageView)
-        recyclerview = findViewById(R.id.recyclerView)
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        //recyclerview = findViewById(R.id.recyclerView)
+        //recyclerview.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         listMarsPhotos = ArrayList<MarsPhoto>()
         marsAdapter = MarsAdapter(listMarsPhotos)
-        recyclerview.adapter = marsAdapter
+        //recyclerview.adapter = marsAdapter
+        binding.recyclerView.adapter = marsAdapter
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         var data = intent.extras?.getString("nkey")
         Log.i("HomeActivity","data is = "+data)
-        val homeTextView:TextView = findViewById(itshome)
-        homeTextView.setText(data)
+
+        //val homeTextView:TextView = findViewById(itshome)
+        //homeTextView.setText(data)
+        binding.itshome.setText(data)
     }
 
-    fun getJson(view: View) {
-        getMarsPhotos()
+    override fun onStart() {
+        super.onStart()
+        //the below can be in onCreate itself
+        binding.btnGet.setOnClickListener{
+            getMarsPhotos()
+        }
     }
+
+    /*fun getJson(view: View) {
+        getMarsPhotos()
+    }*/
 
     private fun getMarsPhotos() {
         GlobalScope.launch(Dispatchers.Main) {
