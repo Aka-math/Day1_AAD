@@ -1,11 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.myapplication"
     compileSdk = 34
+
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.example.myapplication"
@@ -42,4 +48,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //roomdb dependencies
+    implementation("androidx.room:room-common:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+    kapt ("androidx.room:room-compiler:2.6.0")
 }
