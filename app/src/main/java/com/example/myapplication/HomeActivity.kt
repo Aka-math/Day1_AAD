@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.database.Item
 import com.example.myapplication.database.ItemDao
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        viewModel._seconds.observe(this, secsObserver)    //like clicking the bell icon on youtube
 
         itshome = findViewById(R.id.itshome)
         //itshome.setText(""+viewModel.count)
@@ -46,6 +48,13 @@ class HomeActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             val item = dao.getItem(777).first()
             itshome.setText(item.itemName)
+        }
+    }
+
+    var secsObserver : Observer<Int> = object :Observer<Int>{
+        override fun onChanged(value: Int) {
+            //receiving the update/notification
+            itshome.setText(value.toString())
         }
     }
 
