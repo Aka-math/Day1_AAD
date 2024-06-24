@@ -1,23 +1,22 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.myapplication.R.id.itshome
-import com.example.myapplication.databinding.ActivityHomeBinding
+import com.example.myapplication.database.Item
+import com.example.myapplication.database.ItemDao
+import com.example.myapplication.database.ItemRoomDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
-    //lateinit var binding: ActivityHomeBinding
+    lateinit var dao: ItemDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContentView(R.layout.activity_home)
-
+        var database = ItemRoomDatabase.getDatabase(this)
+        dao = database.itemDao()
     }
 
     override fun onStart() {
@@ -25,6 +24,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun insertDb(view: View) {
-
+        GlobalScope.launch {
+            val item = Item(777,"fruits",111.0,22)
+            dao.insert(item)
+        }
     }
 }
