@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Build
 import android.provider.AlarmClock
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -120,5 +121,15 @@ class MainActivity : AppCompatActivity() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+    }
+
+    fun sendSms(view: View) {
+        /*val smsManager: SmsManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.getSystemService(SmsManager::class.java)
+        } else {
+            SmsManager.getDefault()
+        }*/
+        val smsManager:SmsManager = SmsManager.getDefault()
+        smsManager.sendTextMessage("9880979732",null,"happy day",null,null)
     }
 }
